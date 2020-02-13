@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
 
 export class CreateExercise extends Component {
     constructor(props) {
@@ -15,10 +16,16 @@ export class CreateExercise extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            users: ['Suresh', 'Jaden', 'Cris'],
-            username: 'Suresh'
-        })
+        axios.get('http://localhost:5000/users')
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState({
+                        users: response.data.map(user => user.username),
+                        username: response.data[0].username
+                    })
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     onChangeUsername = (e) => {
@@ -53,15 +60,17 @@ export class CreateExercise extends Component {
             duration: this.state.duration,
             date: this.state.date
         }
-        console.log(exercise)
+        axios.post('http://localhost:5000/exercises/add', exercise)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
 
         window.location = '/';  //Back to homepage
     }
 
     render() {
         return (
-            <div>
-                <h2 className='text-center'>Add new Exercise</h2>
+            <div >
+                <h3 className='text-center m-3'>ADD NEW EXERCISE</h3>
                 <div className='row'>
                     <div className='col-md-6 offset-md-3'>
                         <form onSubmit={this.onSubmit}>
@@ -84,7 +93,7 @@ export class CreateExercise extends Component {
                                 <input type="text" className="form-control" placeholder="Enter Description" required value={this.state.description} onChange={this.onChangeDescription} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="duration">Duration:</label>
+                                <label htmlFor="duration">Duration (in minutes):</label>
                                 <input type="text" className="form-control" placeholder="Enter Duration" required value={this.state.duration} onChange={this.onChangeDuration} />
                             </div>
                             <div className="form-group">

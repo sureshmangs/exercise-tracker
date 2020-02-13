@@ -36,7 +36,7 @@ export class CreateUser extends Component {
     render() {
         return (
             <div>
-                <h2 className='text-center'>Create user</h2>
+                <h3 className='text-center m-3'>CREATE USER</h3>
                 <div className='row'>
                     <div className='col-md-6 offset-md-3'>
                         <form onSubmit={this.onSubmit}>
