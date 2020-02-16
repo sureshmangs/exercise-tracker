@@ -4,11 +4,14 @@
   "description": "Building the app backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "client": "cd .. && npm start",
+    "dev": "concurrently -n 'server,client' -c 'red,green' \"node server.js\" \"npm run client\" "
   },
   "author": "Suresh Mangs",
   "license": "MIT",
   "dependencies": {
+    "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
