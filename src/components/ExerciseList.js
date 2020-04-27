@@ -20,19 +20,22 @@ class ExercisesList extends Component {
         this.state = {
             exercises: []
         };
+        this.exerciseList = this.exerciseList.bind(this);
     }
 
     componentDidMount() {
-        axios.get('/exercises/')
+        axios.get('/exercises')
             .then(response => {
                 this.setState({ exercises: response.data })
             })
-            .catch((err) => { console.log(err); })
+            .catch(err => console.log('error is ', err))
+
     }
 
     deleteExercise = id => {
         axios.delete('/exercises/' + id)
-            .then(response => { console.log(response.data) });
+            .then(response => { 
+            	console.log(response.data) });
 
         this.setState({
             exercises: this.state.exercises.filter(el => el._id !== id)
@@ -46,6 +49,7 @@ class ExercisesList extends Component {
     }
 
     render() {
+    
         return (
             <div className='text-center'>
                 <h3 className='m-3'>EXERCISE LOG</h3>

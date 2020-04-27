@@ -19,8 +19,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://dbUserSM:CZuvQ4uRdkiHbGgs@cluster0-mkgcg.gcp.mongodb.net/test?retryWrites=true&w=majority";;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+const MONGODB_URI = "xxxxxxxxxxxxxxxxxxxxxxxxxMONGODB_URIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('MongoDB database has been successfully established');
@@ -32,7 +32,7 @@ if(env !== 'development' && app.use(express.static(path.join(__dirname, '/../bui
 }
 
 
-if(env !== 'development' && app.get('*', (req, res) => {
+if(env !== 'development' && app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/../build/index.html'));
 })) {
 	console.log('getting files from static build')

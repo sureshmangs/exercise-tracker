@@ -25,7 +25,7 @@ export class CreateExercise extends Component {
                     })
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log('error is ',err))
     }
 
     onChangeUsername = (e) => {
@@ -60,7 +60,7 @@ export class CreateExercise extends Component {
             duration: this.state.duration,
             date: this.state.date
         }
-        axios.post('http://localhost:5000/exercises/add', exercise)
+        axios.post('/exercises/add', exercise)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
 

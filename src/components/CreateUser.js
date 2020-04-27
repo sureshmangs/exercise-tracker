@@ -23,8 +23,8 @@ export class CreateUser extends Component {
         }
 
         axios.post('/users/add', user)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
+            .then(res => console.log('user added is ',res.data))
+            .catch(err => console.log('error is ',err))
         console.log(user)
 
         this.setState({

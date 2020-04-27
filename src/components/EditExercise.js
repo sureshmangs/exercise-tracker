@@ -26,11 +26,9 @@ class EditExercise extends Component {
                     date: new Date(response.data.date)
                 })
             })
-            .catch(function (error) {
-                console.log(error);
-            })
+            .catch(err => console.log('error is ', err))
 
-        axios.get('/users/')
+        axios.get('/users')
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({
@@ -38,9 +36,8 @@ class EditExercise extends Component {
                     })
                 }
             })
-            .catch((err) => {
-                console.log(err);
-            })
+            .catch(err => console.log('error is ', err))
+            
 
     }
 
@@ -78,8 +75,9 @@ class EditExercise extends Component {
             date: this.state.date
         }
 
-        axios.post('http://localhost:5000/exercises/update/' + this.props.match.params.id, exercise)
-            .then(res => console.log(res.data));
+        axios.post('/exercises/update/' + this.props.match.params.id, exercise)
+            .then(res => console.log('response is ',res.data))
+            .catch(err => console.log('error is ',err))
 
         window.location = '/';
     }
